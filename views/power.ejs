@@ -1,0 +1,161 @@
+<!-- index.ejs -->
+
+<html>
+
+<head>
+    <style>
+        /* style.css */
+
+body {
+    text-align: center;
+    background-color: #f5f5f5;
+    font-family: 'Arial', sans-serif;
+}
+
+.hari {
+    background-color: #fff;
+    max-width: 800px;
+    margin: 50px auto;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.app-title {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    margin: 0;
+    border-radius: 8px;
+}
+
+.data {
+    border: 2px solid #34495e;
+    background-color: #ecf0f1;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.form-title {
+    color: #e74c3c;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+form label {
+    color: #3498db;
+    font-size: 16px;
+}
+
+form input,
+form select {
+    background-color: #ecf0f1;
+    font-size: 16px;
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #2ecc71;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #27ae60;
+}
+
+.task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list {
+    background-color: #87badc;
+    border: 2px solid #2980b9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.add {
+    border: 2px solid #2980b9;
+    background-color: #3498db;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.task-description,
+.task-category,
+.due-date {
+    color: #292120;
+    display:inline;
+    font-size: 16px;
+}
+
+.fa-shake {
+    font-size: 18px;
+    color: #c0392b;
+}
+
+/* Add more styles as needed */
+
+    </style>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/9d5d80b9e2.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="hari">
+        <h1 class="app-title">TODO App</h1>
+        <div class="data">
+            <form action="/data" method="post">
+                <h1 class="form-title">Adding a new Task</h1>
+                <label for="description">DESCRIPTION:</label>
+                <input type="text" name="description" placeholder="What do you want to do?" required><br><br>
+                <label for="category">CATEGORY:</label>
+                <select name="category" id="category">
+                    <option value="personal">personal</option>
+                    <option value="work">work</option>
+                    <option value="school">school</option>
+                    <option value="cleaning">cleaning</option>
+                    <option value="other">other</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="date">DUE-DATE:</label>
+                <input type="date" name="duedate" placeholder="duedate"><br><br>
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+
+        <ul class="task-list">
+            <div class="list">
+                <h1>Your Tasks</h1>
+                <% for (let i of tasks) { %>
+                    <div class="add">
+                        <li>
+                            <div><i class="fa-brands fa-stack-exchange"></i>&nbsp;&nbsp;&nbsp;Description :- <div class="task-description"><%= i.description %></div></div><br>
+                            <div>Category :- <div class="task-category"><%= i.category %></div> </div><br>
+                            <div>Due Date :- <div class="due-date"><%= i.duedate == "" ? "No Deadline" : i.duedate %></div> </div><br>
+
+                            <div>
+                                <input type="checkbox" id="text1" name="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="/delete/?id=<%=i._id%>"><i class="fa-sharp fa-solid fa-trash fa-shake"></i></a>
+                            </li>
+                        </div>
+                    <% } %>
+                </div>
+            </ul>
+        </div>
+    </body>
+
+</html>
